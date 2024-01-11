@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Box, BoxProps, Sheet } from "@mui/joy";
 
-export const Root: FC = (props: BoxProps) => {
+export const RootLayout: FC<BoxProps> = (props: BoxProps) => {
   return (
     <Box
       {...props}
@@ -22,7 +22,7 @@ export const Root: FC = (props: BoxProps) => {
   );
 };
 
-export const Header: FC = (props: BoxProps) => {
+export const HeaderLayout: FC<BoxProps> = (props: BoxProps) => {
   return (
     <Box
       component="header"
@@ -50,7 +50,7 @@ export const Header: FC = (props: BoxProps) => {
   );
 };
 
-export const SideNav = (props: BoxProps) => {
+export const SideNavLayout: FC<BoxProps> = (props: BoxProps) => {
   return (
     <Box
       component="nav"
@@ -73,7 +73,7 @@ export const SideNav = (props: BoxProps) => {
   );
 };
 
-export const SidePane = (props: BoxProps) => {
+export const SidePaneLayout: FC<BoxProps> = (props: BoxProps) => {
   return (
     <Box
       className="Inbox"
@@ -94,7 +94,7 @@ export const SidePane = (props: BoxProps) => {
   );
 };
 
-export const Main = (props: BoxProps) => {
+export const MainLayout: FC<BoxProps> = (props: BoxProps) => {
   return (
     <Box
       component="main"
@@ -105,7 +105,9 @@ export const Main = (props: BoxProps) => {
   );
 };
 
-export const SideDrawer = (
+export const SideDrawer: FC<
+  BoxProps & { onClose: React.MouseEventHandler<HTMLDivElement> }
+> = (
   props: BoxProps & { onClose: React.MouseEventHandler<HTMLDivElement> },
 ) => {
   const { onClose, ...other } = props;

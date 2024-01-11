@@ -1,30 +1,14 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Outlet } from "react-router-dom";
+import { CssBaseline, CssVarsProvider } from "@mui/joy";
 import {
-  Box,
-  Button,
-  CssBaseline,
-  CssVarsProvider,
-  Drawer,
-  List,
-  ListItem,
-  Stack,
-} from "@mui/joy";
-import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
-import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
-import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
-import InsertDriveFileRoundedIcon from "@mui/icons-material/InsertDriveFileRounded";
-import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import {
-  Header as HeaderLayout,
-  Root as RootLayout,
-  Main as MainLayout,
-} from "./Layout";
-import Header from "./features/header/Header.tsx";
+  HeaderLayout,
+  RootLayout,
+  MainLayout,
+  SideNavLayout,
+} from "./features/layout/Layout.tsx";
+import Header from "./features/layout/Header.tsx";
+import Navigation from "./features/layout/Navigation.tsx";
 
 const Root: FC = () => (
   <CssVarsProvider>
@@ -33,6 +17,9 @@ const Root: FC = () => (
       <HeaderLayout>
         <Header />
       </HeaderLayout>
+      <SideNavLayout>
+        <Navigation />
+      </SideNavLayout>
       <MainLayout>
         <Outlet />
       </MainLayout>

@@ -1,18 +1,16 @@
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root.tsx";
-import Home from "./features/home/Home.tsx";
+import { pages } from "./Pages.tsx";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Root/>,
-        children: [
-            {
-                path: "/",
-                element: <Home/>,
-            }
-        ]
-    },
+  {
+    path: "/",
+    element: <Root />,
+    children: pages.map(({ path, element }) => ({
+      path: path,
+      element: element,
+    })),
+  },
 ]);
 
 export default router;
