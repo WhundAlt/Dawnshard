@@ -35,7 +35,7 @@ const NavigationListItem: FC<{
         </ListItemButton>
       </ListItem>
     );
-  }, [icon, label, path, selected]);
+  }, [icon, label, onClickItem, path, selected]);
 
 const Navigation: FC<{ onClickItem: () => void }> = ({ onClickItem }) => {
   const { pathname } = useLocation();

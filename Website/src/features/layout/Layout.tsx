@@ -12,7 +12,7 @@ export const RootLayout: FC<BoxProps> = (props: BoxProps) => {
           gridTemplateColumns: {
             xs: "1fr",
             sm: "minmax(64px, 200px) minmax(450px, 1fr)",
-            md: "minmax(160px, 300px) minmax(300px, 500px) minmax(500px, 1fr)",
+            md: "minmax(160px, 300px) 1fr",
           },
           gridTemplateRows: "64px 1fr",
           minHeight: "100vh",
@@ -103,6 +103,8 @@ export const SideNavLayout: FC<{
             xs: "none",
             sm: "initial",
           },
+          position: "sticky",
+          height: "100%",
         },
       ]}
     >
@@ -138,47 +140,7 @@ export const MainLayout: FC<BoxProps> = (props: BoxProps) => {
       component="main"
       className="Main"
       {...props}
-      sx={[{ p: 2 }, ...(Array.isArray(props.sx) ? props.sx : [props.sx])]}
+      sx={[...(Array.isArray(props.sx) ? props.sx : [props.sx])]}
     />
-  );
-};
-
-export const SideDrawer: FC<
-  BoxProps & { onClose: React.MouseEventHandler<HTMLDivElement> }
-> = (
-  props: BoxProps & { onClose: React.MouseEventHandler<HTMLDivElement> },
-) => {
-  const { onClose, ...other } = props;
-  return (
-    <Box
-      {...other}
-      sx={[
-        { position: "fixed", zIndex: 1200, width: "100%", height: "100%" },
-        ...(Array.isArray(other.sx) ? other.sx : [other.sx]),
-      ]}
-    >
-      <Box
-        role="button"
-        onClick={onClose}
-        sx={{
-          position: "absolute",
-          inset: 0,
-          bgcolor: (theme) =>
-            `rgba(${theme.vars.palette.neutral.darkChannel} / 0.8)`,
-        }}
-      />
-      <Sheet
-        sx={{
-          minWidth: 256,
-          width: "max-content",
-          height: "100%",
-          p: 2,
-          boxShadow: "lg",
-          bgcolor: "background.surface",
-        }}
-      >
-        {props.children}
-      </Sheet>
-    </Box>
   );
 };
