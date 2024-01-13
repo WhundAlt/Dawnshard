@@ -1,5 +1,6 @@
 import Home from "./features/home/Home.tsx";
 import {
+  AccessAlarmRounded,
   AccountTree,
   HouseRounded,
   SvgIconComponent,
@@ -26,5 +27,11 @@ export const pages: Page[] = [
     path: "/test",
     element: <Test />,
     icon: AccountTree,
+  },
+  {
+    label: "Test2",
+    path: "/test2",
+    element: <p>test2</p>,
+    icon: AccessAlarmRounded,
   },
 ];

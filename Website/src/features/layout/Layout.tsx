@@ -1,5 +1,6 @@
-import React, { FC } from "react";
-import { Box, BoxProps, Sheet } from "@mui/joy";
+import React, { FC, ReactNode } from "react";
+import { Box, BoxProps, Drawer, ModalClose, Sheet, Typography } from "@mui/joy";
+import useBreakpoint from "../../shared/hooks/useBreakpoint.ts";
 
 export const RootLayout: FC<BoxProps> = (props: BoxProps) => {
   return (
@@ -50,16 +51,52 @@ export const HeaderLayout: FC<BoxProps> = (props: BoxProps) => {
   );
 };
 
-export const SideNavLayout: FC<BoxProps> = (props: BoxProps) => {
-  return (
+export const SideNavLayout: FC<{
+  open: boolean;
+  onCloseDrawer: () => void;
+  children: ReactNode;
+}> = ({ open, onCloseDrawer, children }) => {
+  const small = useBreakpoint((breakpoints) => breakpoints.down("sm"));
+  console.log({ drawerOpen: open, small: small });
+
+  return small ? (
+    <Drawer
+      open={open}
+      onClose={onCloseDrawer}
+      component="nav"
+      className="navigation"
+    >
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 0.5,
+          ml: "auto",
+          mt: 1,
+          mr: 2,
+        }}
+      >
+        <Typography
+          component="label"
+          htmlFor="close-icon"
+          fontSize="sm"
+          fontWeight="lg"
+          sx={{ cursor: "pointer" }}
+        >
+          Close
+        </Typography>
+        <ModalClose id="close-icon" sx={{ position: "initial" }} />
+      </Box>
+      <Box sx={{ padding: "1rem" }}>{children}</Box>
+    </Drawer>
+  ) : (
     <Box
       component="nav"
       className="Navigation"
-      {...props}
       sx={[
         {
           p: 2,
-          bgcolor: "background.surface",
+          backgroundColor: "background.surface",
           borderRight: "1px solid",
           borderColor: "divider",
           display: {
@@ -67,9 +104,10 @@ export const SideNavLayout: FC<BoxProps> = (props: BoxProps) => {
             sm: "initial",
           },
         },
-        ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
       ]}
-    />
+    >
+      {children}
+    </Box>
   );
 };
 
