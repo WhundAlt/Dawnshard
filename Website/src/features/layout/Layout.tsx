@@ -1,5 +1,13 @@
 import React, { FC, ReactNode } from "react";
-import { Box, BoxProps, Drawer, ModalClose, Sheet, Typography } from "@mui/joy";
+import {
+  Box,
+  BoxProps,
+  Drawer,
+  GlobalStyles,
+  ModalClose,
+  Sheet,
+  Typography,
+} from "@mui/joy";
 import useBreakpoint from "../../shared/hooks/useBreakpoint.ts";
 
 export const RootLayout: FC<BoxProps> = (props: BoxProps) => {
@@ -8,13 +16,7 @@ export const RootLayout: FC<BoxProps> = (props: BoxProps) => {
       {...props}
       sx={[
         {
-          display: "grid",
-          gridTemplateColumns: {
-            xs: "1fr",
-            sm: "minmax(64px, 200px) minmax(450px, 1fr)",
-            md: "minmax(160px, 300px) 1fr",
-          },
-          gridTemplateRows: "64px 1fr",
+          display: "flex",
           minHeight: "100vh",
         },
         ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
@@ -23,12 +25,11 @@ export const RootLayout: FC<BoxProps> = (props: BoxProps) => {
   );
 };
 
-export const HeaderLayout: FC<BoxProps> = (props: BoxProps) => {
+export const HeaderLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <Box
       component="header"
       className="Header"
-      {...props}
       sx={[
         {
           p: 2,
@@ -41,13 +42,23 @@ export const HeaderLayout: FC<BoxProps> = (props: BoxProps) => {
           gridColumn: "1 / -1",
           borderBottom: "1px solid",
           borderColor: "divider",
-          position: "sticky",
+          position: "fixed",
+          width: "100vw",
+          height: "var(--Header-height)",
           top: 0,
           zIndex: 1100,
         },
-        ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
       ]}
-    />
+    >
+      <GlobalStyles
+        styles={{
+          ":root": {
+            "--Header-height": "60px",
+          },
+        }}
+      />
+      {children}
+    </Box>
   );
 };
 
@@ -87,6 +98,13 @@ export const SideNavLayout: FC<{
         </Typography>
         <ModalClose id="close-icon" sx={{ position: "initial" }} />
       </Box>
+      <GlobalStyles
+        styles={{
+          ":root": {
+            "--SideNav-width": "0",
+          },
+        }}
+      />
       <Box sx={{ padding: "1rem" }}>{children}</Box>
     </Drawer>
   ) : (
@@ -99,48 +117,36 @@ export const SideNavLayout: FC<{
           backgroundColor: "background.surface",
           borderRight: "1px solid",
           borderColor: "divider",
-          display: {
-            xs: "none",
-            sm: "initial",
-          },
-          position: "sticky",
           height: "100%",
+          top: "var(--Header-height)",
+          width: "var(--SideNav-width)",
+          position: "fixed",
         },
       ]}
     >
+      <GlobalStyles
+        styles={{
+          ":root": {
+            "--SideNav-width": "min(25%, 300px)",
+          },
+        }}
+      />
       {children}
     </Box>
   );
 };
 
-export const SidePaneLayout: FC<BoxProps> = (props: BoxProps) => {
-  return (
-    <Box
-      className="Inbox"
-      {...props}
-      sx={[
-        {
-          bgcolor: "background.surface",
-          borderRight: "1px solid",
-          borderColor: "divider",
-          display: {
-            xs: "none",
-            md: "initial",
-          },
-        },
-        ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
-      ]}
-    />
-  );
-};
-
-export const MainLayout: FC<BoxProps> = (props: BoxProps) => {
+export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <Box
       component="main"
       className="Main"
-      {...props}
-      sx={[...(Array.isArray(props.sx) ? props.sx : [props.sx])]}
-    />
+      sx={{
+        paddingTop: "var(--Header-height)",
+        paddingLeft: "var(--SideNav-width)",
+      }}
+    >
+      {children}
+    </Box>
   );
 };

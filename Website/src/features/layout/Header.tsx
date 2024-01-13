@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, IconButton, Stack, Typography } from "@mui/joy";
+import { Box, GlobalStyles, IconButton, Stack, Typography } from "@mui/joy";
 import ColorSchemeToggle from "./ColorSchemeToggle.tsx";
 import { Close, MenuRounded } from "@mui/icons-material";
 import useBreakpoint from "../../shared/hooks/useBreakpoint.ts";
@@ -18,6 +18,7 @@ const Header: FC<{ onClickMenu: () => void }> = ({ onClickMenu }) => {
       <Stack
         direction="row"
         justifyContent="space-between"
+        alignItems="center"
         gap={1}
         flexGrow={1}
       >
