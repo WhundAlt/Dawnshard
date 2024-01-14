@@ -1,11 +1,10 @@
-import React, { FC, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import {
   Box,
   BoxProps,
   Drawer,
   GlobalStyles,
   ModalClose,
-  Sheet,
   Typography,
 } from "@mui/joy";
 import useBreakpoint from "../../shared/hooks/useBreakpoint.ts";

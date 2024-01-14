@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Box, GlobalStyles, IconButton, Stack, Typography } from "@mui/joy";
+import { Box, IconButton, Stack, Typography } from "@mui/joy";
 import ColorSchemeToggle from "./ColorSchemeToggle.tsx";
-import { Close, MenuRounded } from "@mui/icons-material";
+import { MenuRounded } from "@mui/icons-material";
 import useBreakpoint from "../../shared/hooks/useBreakpoint.ts";
 
 const Header: FC<{ onClickMenu: () => void }> = ({ onClickMenu }) => {

@@ -16,7 +16,7 @@ const Root: FC = () => {
   console.log("open", drawerOpen);
 
   return (
-    <CssVarsProvider>
+    <CssVarsProvider defaultMode="system">
       <CssBaseline />
       <RootLayout>
         <HeaderLayout>
