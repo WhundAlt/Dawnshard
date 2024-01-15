@@ -4,11 +4,11 @@ import {
   CardContent,
   Grid,
   List,
+  ListItem,
   Stack,
   Typography,
   useColorScheme,
 } from "@mui/joy";
-import NumberedListItem from "./NumberedListItem.tsx";
 import { FC } from "react";
 import dragalipatchInputs from "../../assets/dragalipatch.png";
 import dragalipatchDarkInputs from "../../assets/dragalipatchDark.png";
@@ -45,53 +45,53 @@ const HowToPlay: FC = () => {
           <Typography typography="h3" gutterBottom>
             Android
           </Typography>
-          <List component="ol">
-            <NumberedListItem number={1}>
+          <List component="ol" marker="numeric">
+            <ListItem>
               <Typography>
                 Ensure you have the original Dragalia Lost app installed. The
                 Dragalipatch app works by taking the files from the original app
                 and modifying them.
               </Typography>
-            </NumberedListItem>
-            <NumberedListItem number={2}>
+            </ListItem>
+            <ListItem>
               <Typography>
                 Download the Dragalipatch app by LukeFZ from the{" "}
                 <a href="https://github.com/lukefz/dragalipatch/releases/latest">
                   GitHub releases page.
                 </a>
               </Typography>
-            </NumberedListItem>
-            <NumberedListItem number={3}>
+            </ListItem>
+            <ListItem>
               <Typography>
                 Enter{" "}
                 <a href="https://dawnshard.co.uk">https://dawnshard.co.uk</a>{" "}
                 into the &apos;Server Address&apos; field.
               </Typography>
-            </NumberedListItem>
-            <NumberedListItem number={4}>
+            </ListItem>
+            <ListItem>
               <Typography>
                 Leave the CDN address field blank. You can try entering{" "}
                 <a href={"https://cdn.minty.sbs"}>https://cdn.minty.sbs</a> if
                 this is not accepted.
               </Typography>
-            </NumberedListItem>
-            <NumberedListItem number={5}>
+            </ListItem>
+            <ListItem>
               <Typography>
                 Press the &apos;Patch App&apos; button in the lower right
                 corner.
               </Typography>
-            </NumberedListItem>
-            <NumberedListItem number={6}>
+            </ListItem>
+            <ListItem>
               <Typography>
                 Wait for the app to finish patching the Dragalia Lost app. Once
                 it is done, press Install on the screen that follows.
               </Typography>
-            </NumberedListItem>
-            <NumberedListItem number={7}>
+            </ListItem>
+            <ListItem>
               <Typography>
                 Launch the new Dragalia Found app, and play!
               </Typography>
-            </NumberedListItem>
+            </ListItem>
           </List>
         </Grid>
         <Grid xl={1} lg={0}></Grid>

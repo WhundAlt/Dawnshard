@@ -43,7 +43,7 @@ const Navigation: FC<{ onClickItem: () => void }> = ({ onClickItem }) => {
   return useMemo(() => {
     return (
       <List size="md" sx={{ "--ListItem-radius": "8px", "--List-gap": "4px" }}>
-        <ListItem nested>
+        <ListItem nested component="div">
           <ListSubheader>Information</ListSubheader>
           {pages.map(({ label, path, icon }) => (
             <NavigationListItem

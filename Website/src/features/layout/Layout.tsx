@@ -143,6 +143,7 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
       sx={{
         paddingTop: "var(--Header-height)",
         paddingLeft: "var(--SideNav-width)",
+        width: "100%",
       }}
     >
       {children}

@@ -1,11 +1,11 @@
 import Home from "./features/home/Home.tsx";
+import News from "./features/news/News.tsx";
 import {
-  AccessAlarmRounded,
-  AccountTree,
   HouseRounded,
+  NewspaperRounded,
   SvgIconComponent,
 } from "@mui/icons-material";
-import { Test } from "./features/Test.tsx";
+
 import { ReactElement } from "react";
 
 export type Page = {
@@ -23,15 +23,9 @@ export const pages: Page[] = [
     icon: HouseRounded,
   },
   {
-    label: "Test",
-    path: "/test",
-    element: <Test />,
-    icon: AccountTree,
-  },
-  {
-    label: "Test2",
-    path: "/test2",
-    element: <p>test2</p>,
-    icon: AccessAlarmRounded,
+    label: "News",
+    path: "/news",
+    element: <News />,
+    icon: NewspaperRounded,
   },
 ];
