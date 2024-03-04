@@ -268,10 +268,11 @@ namespace DragaliaAPI.Photon.Plugin.Plugins.GameLogic
             }
 
             this.logger.InfoFormat(
-                "Actor {0} with viewer ID {1} left game {2}",
+                "Actor {0} with viewer ID {1} left game {2} (reason: {3})",
                 info.ActorNr,
                 viewerId,
-                this.PluginHost.GameId
+                this.PluginHost.GameId,
+                LeaveReason.ToString(info.Reason)
             );
 
             this.goToIngameStateManager.OnActorLeave(info);
