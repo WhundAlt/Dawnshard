@@ -5,7 +5,6 @@
 	import { cn } from '$shadcn/utils.js';
 
 	export let routeGroups: RouteGroup[];
-	export let drawerOpen: boolean;
 </script>
 
 <div id="navigation" class="hidden flex-col gap-4 py-2 md:flex">
