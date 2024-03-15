@@ -1,11 +1,8 @@
 <script>
-	import { mode } from 'mode-watcher';
 	import * as Card from '$shadcn/components/ui/card/index';
 	import { Button } from '$shadcn/components/ui/button/index';
 	import GitHub from './icons/github.svelte';
 	import Discord from './icons/discord.svelte';
-
-	console.log($mode);
 </script>
 
 <div
@@ -27,13 +24,13 @@
 		</Card.Content>
 		<Card.Footer class="flex-row flex-wrap gap-2">
 			<Button variant="secondary" href="https://github.com/sapiensanatis/dawnshard">
-				<span class="mr-2 fill-black dark:fill-white">
+				<span class="mr-2 fill-accent-foreground">
 					<GitHub />
 				</span>
 				Source code
 			</Button>
 			<Button variant="secondary" href="https://discord.gg/j9zSttjjWj">
-				<span class="mr-2 fill-black dark:fill-white">
+				<span class="mr-2 fill-accent-foreground">
 					<Discord />
 				</span>
 				Discord
