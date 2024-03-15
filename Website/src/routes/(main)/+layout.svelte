@@ -1,13 +1,18 @@
 <script lang="ts">
+	import { ModeWatcher } from "mode-watcher";
+
 	import '../../app.pcss';
 	import Header from './header.svelte';
 	import Navigation from './navigation.svelte';
 	import { routeGroups } from './routes';
+
+	$: drawerOpen = false;
 </script>
 
-<Header />
-<Navigation {routeGroups} />
+<ModeWatcher/>
+<Header bind:drawerOpen/>
+<Navigation {routeGroups} {drawerOpen}/>
 
-<main style:padding-top="var(--header-height)" style:padding-left="var(--navigation-width)">
+<main class="md:pl-[var(--navigation-width)] pl-0" style:padding-top="var(--header-height)" >
 	<slot />
 </main>

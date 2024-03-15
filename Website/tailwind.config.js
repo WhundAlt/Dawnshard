@@ -58,6 +58,11 @@ const config = {
 				sans: [...fontFamily.sans]
 			}
 		}
+	},
+	variants: {
+		extend: {
+			backgroundImage: ['dark']
+		}
 	}
 };
 

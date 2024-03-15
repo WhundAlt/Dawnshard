@@ -10,7 +10,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"shadcn": "pnpx shadcn-svelte@latest add"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
@@ -42,6 +43,7 @@
 		"bits-ui": "^0.19.7",
 		"clsx": "^2.1.0",
 		"lucide-svelte": "^0.357.0",
+		"mode-watcher": "^0.3.0",
 		"tailwind-merge": "^2.2.1",
 		"tailwind-variants": "^0.2.0",
 		"vaul-svelte": "^0.3.0"
