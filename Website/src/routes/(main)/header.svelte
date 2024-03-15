@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { toggleMode } from "mode-watcher";
+	import { toggleMode } from 'mode-watcher';
 	import { Button } from '$shadcn/components/ui/button';
-	import * as Drawer from "$shadcn/components/ui/drawer/index";
+	import * as Drawer from '$shadcn/components/ui/drawer/index';
 	import { Sun, Moon, Menu, Close } from './icons';
 	import { cn } from '$shadcn/utils.js';
 	import { routeGroups } from './routes';
-
 </script>
 
+<!-- NOTE: Drawer does not work without JS enabled. -->
+
 <Drawer.Root direction="left">
-	<header id="header" class="bg-background" >
+	<header id="header" class="bg-background">
 		<Drawer.Trigger class="md:hidden">
 			<Button variant="ghost" class="md:hidden">
 				<Menu />
@@ -29,11 +30,14 @@
 		</Button>
 
 		<Drawer.Portal class="md:hidden">
-			<Drawer.Content id="drawer-content" class="fixed pl-6 pr-2 pt-2 bg-background mt-0 bottom-0 left-0 top-0 w-[50%] rounded-r-[10px]">
+			<Drawer.Content
+				id="drawer-content"
+				class="fixed bottom-0 left-0 top-0 mt-0 w-[50%] rounded-r-[10px] bg-background pl-6 pr-2 pt-2"
+			>
 				<div id="my-content" class="flex flex-col">
 					<Drawer.Close class="self-end">
 						<Button variant="ghost">
-							Close <Close class="ml-2 mt-0.5 h-5 w-5"/>
+							Close <Close class="ml-2 mt-0.5 h-5 w-5" />
 						</Button>
 					</Drawer.Close>
 					{#each routeGroups as routeGroup}
@@ -64,5 +68,10 @@
 		width: 100vw;
 		gap: 1rem;
 		height: var(--header-height);
+	}
+
+	/* Prevent draggable bar from rendering */
+	:global(#drawer-content > :not(#my-content)) {
+		display: none;
 	}
 </style>

@@ -3,6 +3,6 @@
 </script>
 
 <span class="fill-black dark:fill-white">
-<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-{@html src}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html src}
 </span>

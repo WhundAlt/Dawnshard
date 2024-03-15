@@ -1,18 +1,16 @@
 <script>
-	import { mode } from "mode-watcher";
+	import { mode } from 'mode-watcher';
 	import * as Card from '$shadcn/components/ui/card/index';
 	import { Button } from '$shadcn/components/ui/button/index';
-	import GitHub from './icons/github.svelte'
-	import Discord from './icons/discord.svelte'
+	import GitHub from './icons/github.svelte';
+	import Discord from './icons/discord.svelte';
 
 	console.log($mode);
-
-
 </script>
 
 <div
 	id="banner"
-	class="background-image bg-[url('/src/lib/assets/story.webp')] dark:bg-[url('/src/lib/assets/storyDark.webp')] grid grid-cols-12 gap-4 dark:testClass"
+	class="background-image dark:testClass grid grid-cols-12 gap-4 bg-[url('/src/lib/assets/story.webp')] dark:bg-[url('/src/lib/assets/storyDark.webp')]"
 >
 	<Card.Root class="col-span-12 lg:col-span-7">
 		<Card.Header>
@@ -27,16 +25,16 @@
 				development as a fan-led reimplementation of the game&apos;s web backend.
 			</p>
 		</Card.Content>
-		<Card.Footer class="flex-row gap-2 flex-wrap">
+		<Card.Footer class="flex-row flex-wrap gap-2">
 			<Button variant="secondary" href="https://github.com/sapiensanatis/dawnshard">
-				<span class="fill-black dark:fill-white mr-2" >
-					<GitHub/>
+				<span class="mr-2 fill-black dark:fill-white">
+					<GitHub />
 				</span>
 				Source code
 			</Button>
 			<Button variant="secondary" href="https://discord.gg/j9zSttjjWj">
-				<span class="fill-black dark:fill-white mr-2" >
-					<Discord/>
+				<span class="mr-2 fill-black dark:fill-white">
+					<Discord />
 				</span>
 				Discord
 			</Button>
@@ -52,5 +50,4 @@
 		background-position: 10% 10%;
 		background-repeat: no-repeat;
 	}
-
 </style>

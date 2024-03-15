@@ -8,7 +8,7 @@
 	export let drawerOpen: boolean;
 </script>
 
-<div id="navigation" class="flex-col gap-4 py-2 hidden md:flex">
+<div id="navigation" class="hidden flex-col gap-4 py-2 md:flex">
 	<nav class="grid gap-1 px-2">
 		{#each routeGroups as routeGroup}
 			<h2 class="text-m scroll-m-20 font-semibold tracking-tight">{routeGroup.title}</h2>
@@ -21,8 +21,6 @@
 		{/each}
 	</nav>
 </div>
-
-
 
 <style>
 	#navigation {
