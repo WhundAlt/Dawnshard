@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { ModeWatcher } from 'mode-watcher';
 
-	import '../../app.pcss';
 	import Header from './header.svelte';
-	import Navigation from './navigation.svelte';
-	import { routeGroups } from './routes';
+	import SideNav from './sideNav.svelte';
 </script>
 
 <ModeWatcher />
 <Header />
-<Navigation {routeGroups} />
+<SideNav />
 
 <main class="pl-0 md:pl-[var(--navigation-width)]" style:padding-top="var(--header-height)">
 	<slot />
