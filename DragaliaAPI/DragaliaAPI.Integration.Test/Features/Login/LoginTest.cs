@@ -21,6 +21,8 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginIndex_LastLoginBeforeReset_ResetsItemSummonCount()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         await this
             .ApiContext.PlayerShopInfos.Where(x => x.ViewerId == ViewerId)
             .ExecuteUpdateAsync(entity => entity.SetProperty(x => x.DailySummonCount, 5));
@@ -35,6 +37,8 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginIndex_LastLoginBeforeReset_ResetsDragonGiftCount()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         await this
             .ApiContext.PlayerDragonGifts.Where(x => x.ViewerId == ViewerId)
             .ExecuteUpdateAsync(entity => entity.SetProperty(x => x.Quantity, 0));
@@ -87,8 +91,64 @@ public class LoginTest : TestFixture
     }
 
     [Fact]
+    public async Task LoginIndex_LastLoginBeforeReset_NoDragonGifts_ResetsDragonGiftCount()
+    {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
+        await this
+            .ApiContext.PlayerDragonGifts.Where(x => x.ViewerId == ViewerId)
+            .ExecuteDeleteAsync();
+
+        this.MockTimeProvider.SetUtcNow(
+            new DateTimeOffset(2049, 03, 15, 23, 13, 59, TimeSpan.Zero)
+        ); // Monday
+
+        await this.Client.PostMsgpack<LoginIndexResponse>("/login/index", new LoginIndexRequest());
+
+        List<DbPlayerDragonGift> dbPlayerDragonGifts = await this.GetDragonGifts();
+
+        dbPlayerDragonGifts
+            .Where(x => x.DragonGiftId <= DragonGifts.HeartyStew)
+            .Should()
+            .AllSatisfy(
+                x => x.Quantity.Should().Be(1),
+                because: "purchasable gifts should be reset"
+            );
+
+        dbPlayerDragonGifts
+            .Should()
+            .Contain(x => x.DragonGiftId == DragonGifts.JuicyMeat)
+            .Which.Quantity.Should()
+            .Be(1, because: "the current day's rotating gift should be made available");
+    }
+
+    [Fact]
+    public async Task LoginIndex_LastLoginBeforeReset_Saturday_ResetsGoldenChalice()
+    {
+        await this
+            .ApiContext.PlayerDragonGifts.Where(x => x.ViewerId == ViewerId)
+            .ExecuteDeleteAsync();
+
+        this.MockTimeProvider.SetUtcNow(
+            new DateTimeOffset(2049, 03, 14, 23, 13, 59, TimeSpan.Zero)
+        ); // Sunday
+
+        await this.Client.PostMsgpack<LoginIndexResponse>("/login/index", new LoginIndexRequest());
+
+        List<DbPlayerDragonGift> dbPlayerDragonGifts = await this.GetDragonGifts();
+
+        dbPlayerDragonGifts
+            .Should()
+            .Contain(x => x.DragonGiftId == DragonGifts.GoldenChalice)
+            .Which.Quantity.Should()
+            .Be(1, because: "the current day's rotating gift should be made available");
+    }
+
+    [Fact]
     public async Task LoginIndex_GrantsLoginBonusBasedOnDb_GrantsEachDayReward()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         /*
         int oldSkipTickets = (
             await this.ApiContext.PlayerUserData
@@ -133,6 +193,8 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginIndex_LoginBonusLastDay_IsLoopTrue_RollsOver()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         await this.AddToDatabase(
             new DbLoginBonus()
             {
@@ -167,8 +229,7 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginIndex_LoginBonusLastDay_IsLoopFalse_SetsIsComplete()
     {
-        this.MockDateTimeProvider.SetupGet(x => x.UtcNow)
-            .Returns(DateTime.Parse("2018/09/28").ToUniversalTime());
+        this.MockTimeProvider.SetUtcNow(DateTime.Parse("2018/09/28").ToUniversalTime());
 
         await this.AddToDatabase(
             new DbLoginBonus()
@@ -219,6 +280,8 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginIndex_DragonGift_GrantsReward()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         await this.AddToDatabase(
             new DbLoginBonus()
             {
@@ -267,6 +330,8 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginIndex_AddsNewDailyEndeavours()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         int oldMissionId = 1;
         int starryDragonyuleEventId = 22903;
 
@@ -339,6 +404,8 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginIndex_EventNotStarted_DoesAddEventDailyEndeavours()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         int oldMissionId = 1;
         int starryDragonyuleEventId = 22903;
 
@@ -384,6 +451,8 @@ public class LoginTest : TestFixture
     [Fact]
     public async Task LoginVerifyJws_ReturnsOK()
     {
+        this.MockTimeProvider.SetUtcNow(DateTimeOffset.UtcNow);
+
         ResultCodeResponse response = (
             await this.Client.PostMsgpack<ResultCodeResponse>(
                 "/login/verify_jws",
